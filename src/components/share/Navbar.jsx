@@ -29,8 +29,8 @@ const Navbar = () => {
                 <div className="navbar-center">
                     <ul className="flex gap-4">
                         {
-                            navLinks.map((item) => <MyNavLink to={item.path}>{item.text}</MyNavLink>)
-                        }
+                            navLinks.map((item, index) => <MyNavLink key={index} to={item.path}>{item.text}</MyNavLink>)
+                        } 
                     </ul>
                 </div>
 
