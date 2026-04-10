@@ -1,14 +1,19 @@
-import React from 'react';
-import { Pie, PieChart, ResponsiveContainer } from 'recharts';
-
-const data = [
-    { name: 'Group A', value: 400, fill: '#0088FE' },
-    { name: 'Group B', value: 300, fill: '#00C49F' },
-    { name: 'Group C', value: 300, fill: '#FFBB28' },
-    { name: 'Group D', value: 200, fill: '#FF8042' },
-];
+import React, { useContext } from 'react';
+import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { InstallAppContext } from '../../contact/InstallAppCoantext';
+import AppUse from '../../hooks/AppUse';
 
 const Dashboard = () => {
+    const { installApp = [] } = useContext(InstallAppContext)
+    const{apps, loading}= AppUse();
+    const unstallApps =apps.length-installApp.length;
+    const data = [
+        { name: 'Installed', value: installApp.length, fill: '#0088FE' },
+        { name: 'Unstalled', value: unstallApps, fill: '#00C49F' },
+
+    ];
+
+
     return (
         <div style={{ width: '100%', height: '400px' }}>
             <ResponsiveContainer>
@@ -22,6 +27,8 @@ const Dashboard = () => {
                         dataKey="value"
                         isAnimationActive={true}
                     />
+                    <Legend />
+                    <Tooltip />
                 </PieChart>
             </ResponsiveContainer>
         </div>
